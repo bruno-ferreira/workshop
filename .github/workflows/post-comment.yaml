@@ -1,0 +1,14 @@
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  post_comment:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+          PR_NUMBER: ${{ github.event.number }}
+        run: |
+          gh pr comment $PR_NUMBER --body "REVIEWS!"
